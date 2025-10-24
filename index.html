@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Build in Public Hackathon — NYC</title>
+  <meta name="description" content="PMs and engineers co-build AI prototypes in one afternoon. Documented from idea → MVP → pitch. Join the interest list." />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Build in Public Hackathon — NYC">
+  <meta property="og:description" content="PMs and engineers co-build AI prototypes in one afternoon. We film highlights and share across LinkedIn & YouTube.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/og.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Build in Public Hackathon — NYC">
+  <meta name="twitter:description" content="PMs and engineers co-build AI prototypes in one afternoon. We film highlights and share across LinkedIn & YouTube.">
+  <meta name="twitter:image" content="/og.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Custom animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); }
+      50% { box-shadow: 0 0 40px rgba(0, 0, 0, 0.2); }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-gradient {
+      background-size: 200% 200%;
+      animation: gradient 8s ease infinite;
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .slide-in {
+      animation: slideIn 0.5s ease-out forwards;
+    }
+
+    .animate-pulse-glow {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #18181b 0%, #3f3f46 50%, #18181b 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradient 5s ease infinite;
+    }
+
+    /* Interactive card hover */
+    .hover-lift {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Countdown styles */
+    .countdown-item {
+      min-width: 70px;
+    }
+
+    /* Background decorations */
+    .bg-decoration {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Intersection observer animations */
+    .observe-fade {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .observe-fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Success animation */
+    @keyframes success-bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .success-animation {
+      animation: success-bounce 0.5s ease-in-out;
+    }
+  </style>
+
+  <!--
+    ⚙️ CONFIGURATION - Replace these with your actual values:
+
+    1. GOOGLE_FORM_ACTION_URL:
+       Get from your Google Form's action URL
+       Example: "https://docs.google.com/forms/d/e/1FAIpQLSc.../formResponse"
+
+    2. GOOGLE_FORM_EMAIL_ENTRY_ID:
+       Get from your Google Form's email field entry ID
+       Example: "entry.123456789"
+
+    To find these:
+    - Create a Google Form: "Build in Public Hackathon — Interest List"
+    - Add one Email question
+    - Click "Get pre-filled link" → inspect network or view source
+    - Find formAction URL and entry.xxxxxx ID
+  -->
+  <script>
+    window.GOOGLE_FORM_ACTION_URL = "REPLACE_WITH_GOOGLE_FORM_ACTION_URL";
+    window.GOOGLE_FORM_EMAIL_ENTRY_ID = "REPLACE_WITH_entry_xxxxx";
+  </script>
+</head>
+
+<body class="bg-zinc-50 text-zinc-900 antialiased overflow-x-hidden">
+
+  <!-- Animated background decorations -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden">
+    <div class="bg-decoration animate-float" style="width: 400px; height: 400px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); top: -200px; left: -200px; animation-delay: 0s;"></div>
+    <div class="bg-decoration animate-float" style="width: 300px; height: 300px; background: linear-gradient(135deg, #ec4899, #f43f5e); top: 30%; right: -150px; animation-delay: 2s;"></div>
+    <div class="bg-decoration animate-float" style="width: 350px; height: 350px; background: linear-gradient(135deg, #10b981, #14b8a6); bottom: -175px; left: 20%; animation-delay: 4s;"></div>
+  </div>
+
+  <!-- Hero Section -->
+  <header class="relative max-w-5xl mx-auto px-4 py-12 sm:py-16">
+    <div class="text-center fade-in-up">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight gradient-text">
+        Build in Public Hackathon — NYC
+      </h1>
+      <p class="mt-4 text-lg sm:text-xl text-zinc-600 max-w-3xl mx-auto" style="animation-delay: 0.1s;">
+        PMs × Engineers build AI-powered prototypes in one afternoon. We document everything—from idea → MVP → pitch.
+      </p>
+
+      <!-- Countdown Timer -->
+      <div id="countdown" class="mt-6 flex justify-center gap-4 text-center">
+        <div class="countdown-item">
+          <div class="text-3xl sm:text-4xl font-bold text-zinc-900" id="days">00</div>
+          <div class="text-xs text-zinc-500 uppercase tracking-wide">Days</div>
+        </div>
+        <div class="text-3xl text-zinc-400">:</div>
+        <div class="countdown-item">
+          <div class="text-3xl sm:text-4xl font-bold text-zinc-900" id="hours">00</div>
+          <div class="text-xs text-zinc-500 uppercase tracking-wide">Hours</div>
+        </div>
+        <div class="text-3xl text-zinc-400">:</div>
+        <div class="countdown-item">
+          <div class="text-3xl sm:text-4xl font-bold text-zinc-900" id="minutes">00</div>
+          <div class="text-xs text-zinc-500 uppercase tracking-wide">Minutes</div>
+        </div>
+        <div class="text-3xl text-zinc-400">:</div>
+        <div class="countdown-item">
+          <div class="text-3xl sm:text-4xl font-bold text-zinc-900" id="seconds">00</div>
+          <div class="text-xs text-zinc-500 uppercase tracking-wide">Seconds</div>
+        </div>
+      </div>
+
+      <p class="mt-2 text-sm sm:text-base text-zinc-500">
+        Midtown NYC • Friday, November 22, 2025 • ~30 builders
+      </p>
+
+      <a href="#interest"
+         class="inline-block mt-8 px-8 py-4 bg-zinc-900 text-white text-lg font-semibold rounded-xl hover:bg-zinc-700 hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-zinc-900 focus:ring-offset-2 animate-pulse-glow">
+        Join the interest list →
+      </a>
+    </div>
+
+    <!-- Attendee Backgrounds (Optional Logos) -->
+    <div class="mt-16 text-center observe-fade">
+      <p class="text-xs uppercase tracking-wide text-zinc-400 mb-4">Attendee backgrounds expected</p>
+      <div class="flex flex-wrap justify-center items-center gap-6 sm:gap-8 text-zinc-400 font-semibold text-sm sm:text-base">
+        <span class="hover:text-zinc-900 hover:scale-110 transition-all duration-200 cursor-default">Meta</span>
+        <span class="hover:text-zinc-900 hover:scale-110 transition-all duration-200 cursor-default">Google</span>
+        <span class="hover:text-zinc-900 hover:scale-110 transition-all duration-200 cursor-default">Amazon</span>
+        <span class="hover:text-zinc-900 hover:scale-110 transition-all duration-200 cursor-default">NYU</span>
+        <span class="hover:text-zinc-900 hover:scale-110 transition-all duration-200 cursor-default">Columbia</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="relative max-w-5xl mx-auto px-4 space-y-12 sm:space-y-16 pb-24">
+
+    <!-- What it is & Schedule Section -->
+    <section class="grid sm:grid-cols-2 gap-6 lg:gap-8">
+      <!-- What it is -->
+      <div class="observe-fade bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-zinc-100 hover-lift cursor-pointer">
+        <div class="text-4xl mb-3">🚀</div>
+        <h2 class="text-2xl font-bold text-zinc-900">What it is</h2>
+        <p class="mt-4 text-zinc-600 leading-relaxed">
+          One-afternoon hackathon where <strong>PMs from Meta, Google, and Amazon</strong> pair with
+          <strong>engineers from NYU & Columbia</strong>. Use tools like <strong>Claude, Perplexity, Vercel, Figma, Supabase</strong> to ship a demo in ~4 hours.
+          We film highlights and publish across LinkedIn & YouTube.
+        </p>
+      </div>
+
+      <!-- Schedule -->
+      <div class="observe-fade bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-zinc-100 hover-lift cursor-pointer">
+        <div class="text-4xl mb-3">⏱️</div>
+        <h2 class="text-2xl font-bold text-zinc-900">Schedule</h2>
+        <ul class="mt-4 text-zinc-600 space-y-2 leading-relaxed">
+          <li class="hover:text-zinc-900 transition-colors">
+            <strong>1:00–1:30 PM</strong> Check-in + intros
+          </li>
+          <li class="hover:text-zinc-900 transition-colors">
+            <strong>1:30–2:15 PM</strong> PM idea pitches (3 min each)
+          </li>
+          <li class="hover:text-zinc-900 transition-colors">
+            <strong>2:15–2:30 PM</strong> Team formation
+          </li>
+          <li class="hover:text-zinc-900 transition-colors">
+            <strong>2:30–6:15 PM</strong> Build sprint (AI-assisted)
+          </li>
+          <li class="hover:text-zinc-900 transition-colors">
+            <strong>6:15–7:15 PM</strong> Final demos & judging
+          </li>
+          <li class="hover:text-zinc-900 transition-colors">
+            <strong>7:15–8:00 PM</strong> Awards + networking
+          </li>
+        </ul>
+      </div>
+
+      <!-- Who should attend -->
+      <div class="observe-fade bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-zinc-100 hover-lift cursor-pointer">
+        <div class="text-4xl mb-3">👥</div>
+        <h2 class="text-2xl font-bold text-zinc-900">Who should attend</h2>
+        <ul class="mt-4 text-zinc-600 space-y-3 leading-relaxed">
+          <li class="hover:text-zinc-900 hover:translate-x-1 transition-all">✓ Working PMs who can scope a 4-hour MVP</li>
+          <li class="hover:text-zinc-900 hover:translate-x-1 transition-all">✓ Engineers/Designers (NYU/Columbia and beyond) who love fast prototyping</li>
+          <li class="hover:text-zinc-900 hover:translate-x-1 transition-all">✓ Anyone excited about AI-assisted product building</li>
+        </ul>
+      </div>
+
+      <!-- Judging -->
+      <div class="observe-fade bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-zinc-100 hover-lift cursor-pointer">
+        <div class="text-4xl mb-3">🏆</div>
+        <h2 class="text-2xl font-bold text-zinc-900">Judging</h2>
+        <p class="mt-4 text-zinc-600 leading-relaxed">
+          Projects evaluated on:
+        </p>
+        <ul class="mt-2 text-zinc-600 space-y-1">
+          <li class="hover:text-zinc-900 transition-colors">• Clarity of problem</li>
+          <li class="hover:text-zinc-900 transition-colors">• Product value & UX</li>
+          <li class="hover:text-zinc-900 transition-colors">• Execution creativity</li>
+          <li class="hover:text-zinc-900 transition-colors">• Storytelling</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="observe-fade bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-zinc-100 hover-lift">
+      <div class="text-4xl mb-3">💬</div>
+      <h2 class="text-2xl font-bold text-zinc-900 mb-6">FAQ</h2>
+      <dl class="space-y-6">
+        <div class="faq-item p-4 rounded-lg hover:bg-zinc-50 transition-all cursor-pointer">
+          <dt class="font-semibold text-zinc-900 flex items-center">
+            <span class="mr-2">💰</span> How much does it cost?
+          </dt>
+          <dd class="mt-2 ml-7 text-zinc-600">Free and invite-only. We're building a community of builders.</dd>
+        </div>
+        <div class="faq-item p-4 rounded-lg hover:bg-zinc-50 transition-all cursor-pointer">
+          <dt class="font-semibold text-zinc-900 flex items-center">
+            <span class="mr-2">📝</span> Who owns the code/IP?
+          </dt>
+          <dd class="mt-2 ml-7 text-zinc-600">You do. All code and ideas created belong to your team.</dd>
+        </div>
+        <div class="faq-item p-4 rounded-lg hover:bg-zinc-50 transition-all cursor-pointer">
+          <dt class="font-semibold text-zinc-900 flex items-center">
+            <span class="mr-2">🛠️</span> What tools can we use?
+          </dt>
+          <dd class="mt-2 ml-7 text-zinc-600">Any tools you want. We recommend Claude, Perplexity, Vercel, Figma, and Supabase for rapid prototyping.</dd>
+        </div>
+        <div class="faq-item p-4 rounded-lg hover:bg-zinc-50 transition-all cursor-pointer">
+          <dt class="font-semibold text-zinc-900 flex items-center">
+            <span class="mr-2">🎥</span> Will this be filmed?
+          </dt>
+          <dd class="mt-2 ml-7 text-zinc-600">Yes. We'll capture highlights and demos to share across LinkedIn, YouTube, and TikTok to inspire other builders.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- Email Interest Form -->
+    <section id="interest" class="observe-fade animate-gradient bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 p-8 sm:p-12 rounded-2xl shadow-lg text-white">
+      <div class="max-w-2xl mx-auto text-center">
+        <div class="text-5xl mb-4 animate-float">✉️</div>
+        <h2 class="text-3xl sm:text-4xl font-bold">Join the interest list</h2>
+        <p class="mt-3 text-zinc-300 text-lg">
+          We'll only email event details & recap. No spam, ever.
+        </p>
+
+        <!-- Progressive Enhancement: Works without JS via direct POST to Google Form -->
+        <form id="interestForm"
+              class="mt-8 flex flex-col sm:flex-row gap-3"
+              method="POST"
+              target="_blank"
+              novalidate>
+          <label for="email" class="sr-only">Email address</label>
+          <input
+            required
+            type="email"
+            id="email"
+            name="email"
+            placeholder="your@email.com"
+            aria-label="Email address"
+            class="w-full sm:flex-1 px-5 py-4 rounded-xl border-2 border-zinc-700 bg-white text-zinc-900 placeholder-zinc-400 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-zinc-900 focus:scale-105 text-lg transition-all" />
+          <button
+            type="submit"
+            id="submitBtn"
+            class="px-8 py-4 rounded-xl bg-white text-zinc-900 font-semibold text-lg hover:bg-zinc-100 hover:scale-105 transition-all focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-zinc-900">
+            Notify me
+          </button>
+        </form>
+
+        <div id="successMessage" class="hidden mt-6 p-4 bg-green-500 rounded-lg text-white font-semibold">
+          🎉 Success! We'll keep you updated on the event.
+        </div>
+
+        <p class="mt-4 text-sm text-zinc-400">
+          Having trouble? Email <a class="underline hover:text-white transition-colors" href="mailto:YOUR_EMAIL_HERE?subject=Hackathon%20Interest">YOUR_EMAIL_HERE</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Sponsors / Partners -->
+    <section class="observe-fade text-center">
+      <div class="text-4xl mb-3">🤝</div>
+      <h2 class="text-2xl font-bold text-zinc-900 mb-4">Sponsors / Partners</h2>
+      <p class="text-zinc-600 max-w-2xl mx-auto">
+        Looking to highlight AI/dev tools via credits, swag, or a judge?
+        Contact: <a href="mailto:YOUR_EMAIL_HERE?subject=Sponsorship%20Inquiry" class="underline font-semibold text-zinc-900 hover:text-zinc-700 hover:scale-105 inline-block transition-all">YOUR_EMAIL_HERE</a>
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative py-10 border-t border-zinc-200 text-center text-sm text-zinc-500">
+    <p>
+      © <span id="year"></span> Build in Public Hackathon — NYC
+    </p>
+    <p class="mt-2 text-xs">
+      Privacy: We only use your email for event updates and recap.
+    </p>
+    <button id="scrollToTop" class="fixed bottom-8 right-8 bg-zinc-900 text-white p-4 rounded-full shadow-lg hover:bg-zinc-700 hover:scale-110 transition-all focus:outline-none focus:ring-4 focus:ring-zinc-900 opacity-0 pointer-events-none">
+      ↑
+    </button>
+  </footer>
+
+  <!-- Progressive Enhancement Script -->
+  <script>
+    // Auto-populate current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ========================================
+    // COUNTDOWN TIMER
+    // ========================================
+    const eventDate = new Date('November 22, 2025 13:00:00 EST').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+      if (distance < 0) {
+        document.getElementById('countdown').innerHTML = '<p class="text-2xl font-bold">Event is live! 🎉</p>';
+      }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ========================================
+    // SCROLL ANIMATIONS (Intersection Observer)
+    // ========================================
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 100);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.observe-fade').forEach((el) => {
+      observer.observe(el);
+    });
+
+    // ========================================
+    // SCROLL TO TOP BUTTON
+    // ========================================
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollToTopBtn.style.opacity = '1';
+        scrollToTopBtn.style.pointerEvents = 'auto';
+      } else {
+        scrollToTopBtn.style.opacity = '0';
+        scrollToTopBtn.style.pointerEvents = 'none';
+      }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // ========================================
+    // GOOGLE FORM INTEGRATION
+    // ========================================
+    const form = document.getElementById('interestForm');
+    const emailInput = document.getElementById('email');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('successMessage');
+
+    if (window.GOOGLE_FORM_ACTION_URL &&
+        window.GOOGLE_FORM_EMAIL_ENTRY_ID &&
+        !window.GOOGLE_FORM_ACTION_URL.includes('REPLACE')) {
+
+      // Set the Google Form action URL
+      form.setAttribute('action', window.GOOGLE_FORM_ACTION_URL);
+
+      // Replace the visible input name with Google Forms entry ID for POST
+      emailInput.setAttribute('name', window.GOOGLE_FORM_EMAIL_ENTRY_ID);
+
+      console.log('✓ Google Form integration active');
+
+      // Enhanced form submission with animation
+      form.addEventListener('submit', function(e) {
+        // Allow form to submit naturally to Google Forms
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+
+        // Show success message after a delay
+        setTimeout(() => {
+          successMessage.classList.remove('hidden');
+          successMessage.classList.add('success-animation');
+          form.style.display = 'none';
+        }, 1500);
+      });
+
+    } else {
+      // Fallback: log warning if form not configured
+      console.warn('⚠️ Google Form not configured. Please replace GOOGLE_FORM_ACTION_URL and GOOGLE_FORM_EMAIL_ENTRY_ID in the <head> section.');
+
+      // Provide graceful degradation with demo animation
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        if (emailInput.value && emailInput.checkValidity()) {
+          submitBtn.textContent = 'Sending...';
+          submitBtn.disabled = true;
+
+          setTimeout(() => {
+            successMessage.classList.remove('hidden');
+            successMessage.classList.add('success-animation');
+            form.style.display = 'none';
+          }, 1000);
+        } else {
+          alert('Please enter a valid email address.');
+        }
+      });
+    }
+
+    // ========================================
+    // EASTER EGG: Konami Code
+    // ========================================
+    let konamiCode = [];
+    const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
+    document.addEventListener('keydown', (e) => {
+      konamiCode.push(e.key);
+      konamiCode.splice(-konamiPattern.length - 1, konamiCode.length - konamiPattern.length);
+
+      if (konamiCode.join('') === konamiPattern.join('')) {
+        document.body.style.animation = 'gradient 2s ease infinite';
+        document.body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%)';
+        document.body.style.backgroundSize = '400% 400%';
+
+        setTimeout(() => {
+          document.body.style.animation = '';
+          document.body.style.background = '';
+        }, 5000);
+      }
+    });
+
+    // ========================================
+    // PARTICLE CURSOR EFFECT (Optional fun detail)
+    // ========================================
+    document.addEventListener('mousemove', (e) => {
+      if (Math.random() > 0.95) {
+        const particle = document.createElement('div');
+        particle.className = 'fixed pointer-events-none';
+        particle.style.left = e.pageX + 'px';
+        particle.style.top = e.pageY + 'px';
+        particle.style.width = '4px';
+        particle.style.height = '4px';
+        particle.style.background = '#3b82f6';
+        particle.style.borderRadius = '50%';
+        particle.style.opacity = '0.6';
+        particle.style.transition = 'all 0.5s ease';
+        document.body.appendChild(particle);
+
+        setTimeout(() => {
+          particle.style.opacity = '0';
+          particle.style.transform = 'translateY(20px) scale(0.5)';
+        }, 10);
+
+        setTimeout(() => {
+          particle.remove();
+        }, 500);
+      }
+    });
+
+    console.log('🚀 Build in Public Hackathon — Landing page loaded!');
+    console.log('💡 Tip: Try the Konami code for a surprise!');
+  </script>
+
+</body>
+</html>
